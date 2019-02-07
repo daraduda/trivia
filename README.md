@@ -1,1 +1,1 @@
-### trivia the simple windows console game.
+### Trivia is simple windows console game.
