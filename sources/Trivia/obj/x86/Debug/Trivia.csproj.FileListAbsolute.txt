@@ -1,6 +1,0 @@
-d:\Data\github\trivia\sources\Trivia\bin\Debug\Trivia.exe
-d:\Data\github\trivia\sources\Trivia\bin\Debug\Trivia.pdb
-d:\Data\github\trivia\sources\Trivia\obj\x86\Debug\Trivia.csprojAssemblyReference.cache
-d:\Data\github\trivia\sources\Trivia\obj\x86\Debug\Trivia.csproj.CoreCompileInputs.cache
-d:\Data\github\trivia\sources\Trivia\obj\x86\Debug\Trivia.exe
-d:\Data\github\trivia\sources\Trivia\obj\x86\Debug\Trivia.pdb
