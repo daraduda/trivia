@@ -8,9 +8,14 @@ namespace Trivia
 	public class Game
 	{
 		private int currentPlayer = -1;
-		private List<Player> players = new List<Player>();
-		private Dictionary<QuestionCategory, List<string>> questions = new Dictionary<QuestionCategory, List<string>>();
-		private readonly ConsoleColor[] colors = { ConsoleColor.Gray, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Red };
+		private IList<Player> players = new List<Player>();
+		private IDictionary<QuestionCategory, List<string>> questions = new Dictionary<QuestionCategory, List<string>>();
+		private readonly ConsoleColor[] colors = {
+			ConsoleColor.Gray,
+			ConsoleColor.Green,
+			ConsoleColor.Yellow,
+			ConsoleColor.Red
+		};
 
 		public enum QuestionCategory
 		{
@@ -42,19 +47,9 @@ namespace Trivia
 			}
 		}
 
-		public Player CurrentPlayer
-		{
-			get
-			{
-				return players[currentPlayer];
-				
-			}
-		}
+		public Player CurrentPlayer => players[currentPlayer];
 
-		public bool IsPlayable()
-		{
-			return HowManyPlayers() >= 2;
-		}
+		public bool IsPlayable() => HowManyPlayers() >= 2;
 
 		public void AddPlayer(string playerName)
 		{
@@ -69,10 +64,7 @@ namespace Trivia
 			Console.WriteLine($"They are player number {player.Index + 1}");
 		}
 
-		public int HowManyPlayers()
-		{
-			return players.Count;
-		}
+		public int HowManyPlayers() => players.Count;
 
 		public void SelectNexPlayer()
 		{
@@ -233,10 +225,7 @@ namespace Trivia
 			return false;
 		}
 
-		private bool DidPlayerWin(Player player)
-		{
-			return player.Purse >= 6;
-		}
+		private bool DidPlayerWin(Player player) => player.Purse >= 6;
 		#endregion
 	}
 }
