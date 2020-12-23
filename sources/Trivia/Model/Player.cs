@@ -22,7 +22,7 @@ namespace Trivia.Model
 		}
 
 		/// <summary>
-		/// Current index propery
+		/// Current index property
 		/// </summary>
 		public int Index { get; set; }
 

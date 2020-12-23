@@ -7,10 +7,10 @@ namespace Trivia
 {
 	public class Game
 	{
-		private int currentPlayer = -1;
-		private IList<Player> players = new List<Player>();
-		private IDictionary<QuestionCategory, List<string>> questions = new Dictionary<QuestionCategory, List<string>>();
-		private readonly ConsoleColor[] colors = {
+		private int _currentPlayer = -1;
+		private readonly IList<Player> _players = new List<Player>();
+		private readonly IDictionary<QuestionCategory, List<string>> _questions = new Dictionary<QuestionCategory, List<string>>();
+		private readonly ConsoleColor[] _colors = {
 			ConsoleColor.Gray,
 			ConsoleColor.Green,
 			ConsoleColor.Yellow,
@@ -33,21 +33,21 @@ namespace Trivia
 		protected void InitQuestions()
 		{
 			//TODO: Here we can read questions data from json or xml
-			questions.Add(QuestionCategory.Pop, new List<string>());
-			questions.Add(QuestionCategory.Science, new List<string>());
-			questions.Add(QuestionCategory.Sport, new List<string>());
-			questions.Add(QuestionCategory.Rock, new List<string>());
+			_questions.Add(QuestionCategory.Pop, new List<string>());
+			_questions.Add(QuestionCategory.Science, new List<string>());
+			_questions.Add(QuestionCategory.Sport, new List<string>());
+			_questions.Add(QuestionCategory.Rock, new List<string>());
 
-			foreach (var key in questions.Keys)
+			foreach (var key in _questions.Keys)
 			{
 				for (int i = 0; i < 50; i++)
 				{
-					questions[key].Add($"{key} Question {i}");
+					_questions[key].Add($"{key} Question {i}");
 				}
 			}
 		}
 
-		public Player CurrentPlayer => players[currentPlayer];
+		public Player CurrentPlayer => _players[_currentPlayer];
 
 		public bool IsPlayable() => HowManyPlayers() >= 2;
 
@@ -55,28 +55,28 @@ namespace Trivia
 		{
 			Player player = new Player();
 			player.Name = playerName;
-			players.Add(player);
+			_players.Add(player);
 
-			player.Index = players.IndexOf(player);
-			player.Color = player.Index < colors.Length ? colors[player.Index] : ConsoleColor.White;
+			player.Index = _players.IndexOf(player);
+			player.Color = player.Index < _colors.Length ? _colors[player.Index] : ConsoleColor.White;
 
 			Console.WriteLine($"{playerName} was added");
 			Console.WriteLine($"They are player number {player.Index + 1}");
 		}
 
-		public int HowManyPlayers() => players.Count;
+		public int HowManyPlayers() => _players.Count;
 
 		public void SelectNexPlayer()
 		{
-			currentPlayer++;
+			_currentPlayer++;
 
-			if (currentPlayer == players.Count)
-				currentPlayer = 0;
+			if (_currentPlayer == _players.Count)
+				_currentPlayer = 0;
 		}
 
 		public void Roll(int roll)
 		{
-			Player player = players[currentPlayer];
+			Player player = _players[_currentPlayer];
 			
 			Console.ForegroundColor = player.Color;
 			Console.WriteLine($"{player.Name} is the current player");
@@ -127,7 +127,7 @@ namespace Trivia
 
 		public bool Turn(int roll)
 		{
-			Player player = players[currentPlayer];
+			Player player = _players[_currentPlayer];
 
 			if (player.IsPenaltyBox && !player.IsGettingOutOfPenaltyBox)
 			{
@@ -146,14 +146,14 @@ namespace Trivia
 		{
 			QuestionCategory category = GetCurrentCategory(player.Place);
 
-			if (questions.Count == 0)
+			if (_questions.Count == 0)
 			{
 				Console.WriteLine("Questions in this category is over.");
 				return;
 			}
 
-			string question = questions[category].First();
-			questions[category].RemoveAt(0);
+			string question = _questions[category].First();
+			_questions[category].RemoveAt(0);
 
 			Console.WriteLine(question);
 		}
